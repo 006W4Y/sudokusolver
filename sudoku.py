@@ -7,119 +7,28 @@ screen = pygame.display.set_mode((900, 1000))
 pygame.display.set_caption("Sudoku Solver A. Freudenberg")
 base_font = pygame.font.Font(None, 50)
 
-#functions:
+# functions:
 
+n = 9
 
+field = [[[1 for k in range(n)] for j in range(n)] for i in range(n)]
+counter = 0
+ergebnis = 0
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-user_text = ""
-user_text1 = ""
-user_text2 = ""
-user_text3 = ""
-user_text4 = ""
-user_text5 = ""
-user_text6 = ""
-user_text7 = ""
-user_text8 = ""
-user_text9 = ""
-user_text10 = ""
-user_text11 = ""
-user_text12 = ""
-user_text13 = ""
-user_text14 = ""
-user_text15 = ""
-user_text16 = ""
-user_text17 = ""
-user_text18 = ""
-user_text19 = ""
-user_text20 = ""
-user_text21 = ""
-user_text22 = ""
-user_text23 = ""
-user_text24 = ""
-user_text25 = ""
-user_text26 = ""
-user_text27 = ""
-user_text28 = ""
-user_text29 = ""
-user_text30 = ""
-user_text31 = ""
-user_text32 = ""
-user_text33 = ""
-user_text34 = ""
-user_text35 = ""
-user_text36 = ""
-user_text37 = ""
-user_text38 = ""
-user_text39 = ""
-user_text40 = ""
-user_text41 = ""
-user_text42 = ""
-user_text43 = ""
-user_text44 = ""
-user_text45 = ""
-user_text46 = ""
-user_text47 = ""
-user_text48 = ""
-user_text49 = ""
-user_text50 = ""
-user_text51 = ""
-user_text52 = ""
-user_text53 = ""
-user_text54 = ""
-user_text55 = ""
-user_text56 = ""
-user_text57 = ""
-user_text58 = ""
-user_text59 = ""
-user_text60 = ""
-user_text61 = ""
-user_text62 = ""
-user_text63 = ""
-user_text64 = ""
-user_text65 = ""
-user_text66 = ""
-user_text67 = ""
-user_text68 = ""
-user_text69 = ""
-user_text70 = ""
-user_text71 = ""
-user_text72 = ""
-user_text73 = ""
-user_text74 = ""
-user_text75 = ""
-user_text76 = ""
-user_text77 = ""
-user_text78 = ""
-user_text79 = ""
-user_text80 = ""
-user_text81 = ""
+user_text = [["" for g in range(n)] for h in range(n)]
 text = "Submit"
 
-input_rect = pygame.Rect(10, 10, 80, 80)    #1
-input_rect1 = pygame.Rect(105, 10, 80, 80)  #2
-input_rect2 = pygame.Rect(200, 10, 80, 80)  #3
-input_rect3 = pygame.Rect(315, 10, 80, 80)  #4
-input_rect4 = pygame.Rect(410, 10, 80, 80)  #5
-input_rect5 = pygame.Rect(505, 10, 80, 80)  #6
-input_rect6 = pygame.Rect(620, 10, 80, 80)  #7
-input_rect7 = pygame.Rect(715, 10, 80, 80)  #8
-input_rect8 = pygame.Rect(810, 10, 80, 80)  #9
+
+
+input_rect = pygame.Rect(10, 10, 80, 80)  # 1
+input_rect1 = pygame.Rect(105, 10, 80, 80)  # 2
+input_rect2 = pygame.Rect(200, 10, 80, 80)  # 3
+input_rect3 = pygame.Rect(315, 10, 80, 80)  # 4
+input_rect4 = pygame.Rect(410, 10, 80, 80)  # 5
+input_rect5 = pygame.Rect(505, 10, 80, 80)  # 6
+input_rect6 = pygame.Rect(620, 10, 80, 80)  # 7
+input_rect7 = pygame.Rect(715, 10, 80, 80)  # 8
+input_rect8 = pygame.Rect(810, 10, 80, 80)  # 9
 
 input_rect9 = pygame.Rect(10, 105, 80, 80)
 input_rect10 = pygame.Rect(105, 105, 80, 80)
@@ -201,7 +110,6 @@ input_rect78 = pygame.Rect(620, 810, 80, 80)
 input_rect79 = pygame.Rect(715, 810, 80, 80)
 input_rect80 = pygame.Rect(810, 810, 80, 80)
 submit_rect = pygame.Rect(10, 910, 880, 80)
-
 
 color_active = (153, 0, 0)
 
@@ -372,7 +280,7 @@ active78 = False
 active79 = False
 active80 = False
 
-#Main Loop
+# Main Loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -706,423 +614,1193 @@ while True:
                 active80 = False
             if submit_rect.collidepoint(event.pos):
                 print("Logic")
+                print(field)
+                print(user_text)
 
-#Text Input
+                while True:
+                    for i in range(0, 9):
+                        for j in range(0, 9):
+                            for k in range(0, 9):
+                                if field[i][j][k] == 1:
+                                    counter += counter
+                                    ergebnis = k
+                            if counter == 1:
+                                print("Answer found!")
+                                user_text[i][j] = ergebnis
+
+        # Text Input
 
         if event.type == pygame.KEYDOWN:
             if active:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text = user_text[:-1]
+                    user_text[0][0] = user_text[0][0][:-1]
                 else:
-                    user_text = event.unicode
+                    user_text[0][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][0]) - 1] = 0
+                        field[0][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][0]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[0][0]) - 1] = 0
+                    field[0][0][int(user_text[0][0]) - 1] = 1
             if active1:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text1 = user_text1[:-1]
+                    user_text[0][1] = user_text[0][1][:-1]
                 else:
-                    user_text1 = event.unicode
+                    user_text[0][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][1]) - 1] = 0
+                        field[0][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][1]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[0][1]) - 1] = 0
+                    field[0][1][int(user_text[0][1]) - 1] = 1
             if active2:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text2 = user_text2[:-1]
+                    user_text[0][2] = user_text[0][2][:-1]
                 else:
-                    user_text2 = event.unicode
+                    user_text[0][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][2]) - 1] = 0
+                        field[0][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][2]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[0][2]) - 1] = 0
+                    field[0][2][int(user_text[0][2]) - 1] = 1
+
             if active3:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text3 = user_text3[:-1]
+                    user_text[0][3] = user_text[0][3][:-1]
                 else:
-                    user_text3 = event.unicode
+                    user_text[0][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][3]) - 1] = 0
+                        field[0][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][3]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[0][3]) - 1] = 0
+                    field[0][3][int(user_text[0][3]) - 1] = 1
             if active4:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text4 = user_text41[:-1]
+                    user_text[0][4] = user_text[0][4][:-1]
                 else:
-                    user_text4 = event.unicode
+                    user_text[0][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][4]) - 1] = 0
+                        field[0][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][4]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[0][4]) - 1] = 0
+                    field[0][4][int(user_text[0][4]) - 1] = 1
             if active5:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text5 = user_text5[:-1]
+                    user_text[0][5] = user_text[0][5][:-1]
                 else:
-                    user_text5 = event.unicode
+                    user_text[0][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][5]) - 1] = 0
+                        field[0][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][5]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[0][5]) - 1] = 0
+                    field[0][5][int(user_text[0][5]) - 1] = 1
+
             if active6:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text6 = user_text6[:-1]
+                    user_text[0][6] = user_text[0][6][:-1]
                 else:
-                    user_text6 = event.unicode
+                    user_text[0][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][6]) - 1] = 0
+                        field[0][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][6]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[0][6]) - 1] = 0
+                    field[0][6][int(user_text[0][6]) - 1] = 1
             if active7:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text7 = user_text7[:-1]
+                    user_text[0][7] = user_text[0][7][:-1]
                 else:
-                    user_text7 = event.unicode
+                    user_text[0][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][7]) - 1] = 0
+                        field[0][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][7]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[0][7]) - 1] = 0
+                    field[0][7][int(user_text[0][7]) - 1] = 1
             if active8:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text8 = user_text8[:-1]
+                    user_text[0][8] = user_text[0][8][:-1]
                 else:
-                    user_text8 = event.unicode
+                    user_text[0][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[0][8]) - 1] = 0
+                        field[0][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[0][8]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[0][8]) - 1] = 0
+                    field[0][8][int(user_text[0][8]) - 1] = 1
+
+            # 2. Zeile
+
             if active9:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text9 = user_text9[:-1]
+                    user_text[1][0] = user_text[1][0][:-1]
                 else:
-                    user_text9 = event.unicode
+                    user_text[1][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][0]) - 1] = 0
+                        field[1][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][0]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[1][0]) - 1] = 0
+                    field[1][0][int(user_text[1][0]) - 1] = 1
             if active10:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text10 = user_text10[:-1]
+                    user_text[1][1] = user_text[1][1][:-1]
                 else:
-                    user_text10 = event.unicode
+                    user_text[1][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][1]) - 1] = 0
+                        field[1][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][1]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[1][1]) - 1] = 0
+                    field[1][1][int(user_text[1][1]) - 1] = 1
             if active11:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text11 = user_text11[:-1]
+                    user_text[1][2] = user_text[1][2][:-1]
                 else:
-                    user_text11 = event.unicode
+                    user_text[1][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][2]) - 1] = 0
+                        field[1][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][2]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[1][2]) - 1] = 0
+                    field[1][2][int(user_text[1][2]) - 1] = 1
+
             if active12:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text12 = user_text12[:-1]
+                    user_text[1][3] = user_text[1][3][:-1]
                 else:
-                    user_text12 = event.unicode
+                    user_text[1][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][3]) - 1] = 0
+                        field[1][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][3]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[1][3]) - 1] = 0
+                    field[1][3][int(user_text[1][3]) - 1] = 1
             if active13:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text13 = user_text13[:-1]
+                    user_text[1][4] = user_text[1][4][:-1]
                 else:
-                    user_text13 = event.unicode
+                    user_text[1][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][4]) - 1] = 0
+                        field[1][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][4]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[1][4]) - 1] = 0
+                    field[1][4][int(user_text[1][4]) - 1] = 1
             if active14:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text14 = user_text14[:-1]
+                    user_text[1][5] = user_text[1][5][:-1]
                 else:
-                    user_text14 = event.unicode
+                    user_text[1][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][5]) - 1] = 0
+                        field[1][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][5]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[1][5]) - 1] = 0
+                    field[1][5][int(user_text[1][5]) - 1] = 1
+
             if active15:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text15 = user_text15[:-1]
+                    user_text[1][6] = user_text[1][6][:-1]
                 else:
-                    user_text15 = event.unicode
+                    user_text[1][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][6]) - 1] = 0
+                        field[1][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][6]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[1][6]) - 1] = 0
+                    field[1][6][int(user_text[1][6]) - 1] = 1
             if active16:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text16 = user_text16[:-1]
+                    user_text[1][7] = user_text[1][7][:-1]
                 else:
-                    user_text16 = event.unicode
+                    user_text[1][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][7]) - 1] = 0
+                        field[1][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][7]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[1][7]) - 1] = 0
+                    field[1][7][int(user_text[1][7]) - 1] = 1
             if active17:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text17 = user_text17[:-1]
+                    user_text[1][8] = user_text[1][8][:-1]
                 else:
-                    user_text17 = event.unicode
+                    user_text[1][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[1][8]) - 1] = 0
+                        field[1][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[1][8]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[1][8]) - 1] = 0
+                    field[1][8][int(user_text[1][8]) - 1] = 1
+
             if active18:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text18 = user_text18[:-1]
+                    user_text[2][0] = user_text[2][0][:-1]
                 else:
-                    user_text18 = event.unicode
+                    user_text[2][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][0]) - 1] = 0
+                        field[2][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][0]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[2][0]) - 1] = 0
+                    field[2][0][int(user_text[2][0]) - 1] = 1
             if active19:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text19 = user_text19[:-1]
+                    user_text[2][1] = user_text[2][1][:-1]
                 else:
                     user_text19 = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][1]) - 1] = 0
+                        field[2][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][1]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[2][1]) - 1] = 0
+                    field[2][1][int(user_text[2][1]) - 1] = 1
             if active20:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text20 = user_text20[:-1]
+                    user_text[2][2] = user_text[2][2][:-1]
                 else:
-                    user_text20 = event.unicode
+                    user_text[2][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][2]) - 1] = 0
+                        field[2][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][2]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[2][2]) - 1] = 0
+                    field[2][2][int(user_text[2][2]) - 1] = 1
+
             if active21:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text21 = user_text21[:-1]
+                    user_text[2][3] = user_text[2][3][:-1]
                 else:
-                    user_text21 = event.unicode
+                    user_text[2][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][3]) - 1] = 0
+                        field[2][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][3]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[2][3]) - 1] = 0
+                    field[2][3][int(user_text[2][3]) - 1] = 1
             if active22:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text22 = user_text22[:-1]
+                    user_text[2][4] = user_text[2][4][:-1]
                 else:
-                    user_text22 = event.unicode
+                    user_text[2][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][4]) - 1] = 0
+                        field[2][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][4]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[2][4]) - 1] = 0
+                    field[2][4][int(user_text[2][4]) - 1] = 1
             if active23:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text23 = user_text23[:-1]
+                    user_text[2][5] = user_text[2][5][:-1]
                 else:
-                    user_text23 = event.unicode
+                    user_text[2][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][5]) - 1] = 0
+                        field[2][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][5]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[2][5]) - 1] = 0
+                    field[2][5][int(user_text[2][5]) - 1] = 1
+
             if active24:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text24 = user_text24[:-1]
+                    user_text[2][6] = user_text[2][6][:-1]
                 else:
-                    user_text24 = event.unicode
+                    user_text[2][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][6]) - 1] = 0
+                        field[2][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][6]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[2][6]) - 1] = 0
+                    field[2][6][int(user_text[2][6]) - 1] = 1
             if active25:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text25 = user_text25[:-1]
+                    user_text[2][7] = user_text[2][7][:-1]
                 else:
-                    user_text25 = event.unicode
+                    user_text[2][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][7]) - 1] = 0
+                        field[2][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][7]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[2][7]) - 1] = 0
+                    field[2][7][int(user_text[2][7]) - 1] = 1
             if active26:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text26 = user_text26[:-1]
+                    user_text[2][8] = user_text[2][8][:-1]
                 else:
-                    user_text26 = event.unicode
+                    user_text[2][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[2][8]) - 1] = 0
+                        field[2][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[2][8]) - 1] = 0
+                    for i in range(0, 3):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[2][8]) - 1] = 0
+                    field[2][8][int(user_text[2][8]) - 1] = 1
+
             if active27:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text27 = user_text27[:-1]
+                    user_text[3][0] = user_text[3][0][:-1]
                 else:
-                    user_text27 = event.unicode
+                    user_text[3][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][0]) - 1] = 0
+                        field[3][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][0]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[3][0]) - 1] = 0
+                    field[3][0][int(user_text[3][0]) - 1] = 1
             if active28:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text28 = user_text28[:-1]
+                    user_text[3][1] = user_text[3][1][:-1]
                 else:
-                    user_text28 = event.unicode
+                    user_text[3][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][1]) - 1] = 0
+                        field[3][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][1]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[3][1]) - 1] = 0
+                    field[3][1][int(user_text[3][1]) - 1] = 1
             if active29:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text29 = user_text29[:-1]
+                    user_text[3][2] = user_text[3][2][:-1]
                 else:
-                    user_text29 = event.unicode
+                    user_text[3][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][2]) - 1] = 0
+                        field[3][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][2]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[3][2]) - 1] = 0
+                    field[3][2][int(user_text[3][2]) - 1] = 1
+
             if active30:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text30 = user_text30[:-1]
+                    user_text[3][3] = user_text[3][3][:-1]
                 else:
-                    user_text30 = event.unicode
+                    user_text[3][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][3]) - 1] = 0
+                        field[3][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][3]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[3][3]) - 1] = 0
+                    field[3][3][int(user_text[3][3]) - 1] = 1
             if active31:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text31 = user_text31[:-1]
+                    user_text[3][4] = user_text[3][4][:-1]
                 else:
-                    user_text31 = event.unicode
+                    user_text[3][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][4]) - 1] = 0
+                        field[3][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][4]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[3][4]) - 1] = 0
+                    field[3][4][int(user_text[3][4]) - 1] = 1
             if active32:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text32 = user_text32[:-1]
+                    user_text[3][5] = user_text[3][5][:-1]
                 else:
-                    user_text32 = event.unicode
+                    user_text[3][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][5]) - 1] = 0
+                        field[3][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][5]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[3][5]) - 1] = 0
+                    field[3][5][int(user_text[3][5]) - 1] = 1
+
             if active33:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text33 = user_text33[:-1]
+                    user_text[3][6] = user_text[3][6][:-1]
                 else:
-                    user_text33 = event.unicode
+                    user_text[3][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][6]) - 1] = 0
+                        field[3][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][6]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[3][6]) - 1] = 0
+                    field[3][6][int(user_text[3][6]) - 1] = 1
             if active34:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text34 = user_text34[:-1]
+                    user_text[3][7] = user_text[3][7][:-1]
                 else:
-                    user_text34 = event.unicode
+                    user_text[3][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][7]) - 1] = 0
+                        field[3][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][7]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[3][7]) - 1] = 0
+                    field[3][7][int(user_text[3][7]) - 1] = 1
             if active35:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text35 = user_text35[:-1]
+                    user_text[3][8] = user_text[3][8][:-1]
                 else:
-                    user_text35 = event.unicode
+                    user_text[3][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[3][8]) - 1] = 0
+                        field[3][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[3][8]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[3][8]) - 1] = 0
+                    field[3][8][int(user_text[3][8]) - 1] = 1
+
             if active36:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text36 = user_text36[:-1]
+                    user_text[4][0] = user_text[4][0][:-1]
                 else:
-                    user_text36 = event.unicode
+                    user_text[4][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][0]) - 1] = 0
+                        field[4][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][0]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[4][0]) - 1] = 0
+                    field[4][0][int(user_text[4][0]) - 1] = 1
             if active37:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text37 = user_text37[:-1]
+                    user_text[4][1] = user_text[4][1][:-1]
                 else:
-                    user_text37 = event.unicode
+                    user_text[4][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][1]) - 1] = 0
+                        field[4][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][1]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[4][1]) - 1] = 0
+                    field[4][1][int(user_text[4][1]) - 1] = 1
             if active38:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text38 = user_text38[:-1]
+                    user_text[4][2] = user_text[4][2][:-1]
                 else:
-                    user_text38 = event.unicode
+                    user_text[4][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][2]) - 1] = 0
+                        field[4][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][2]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[4][2]) - 1] = 0
+                    field[4][2][int(user_text[4][2]) - 1] = 1
+
             if active39:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text39 = user_text39[:-1]
+                    user_text[4][3] = user_text[4][3][:-1]
                 else:
-                    user_text39 = event.unicode
+                    user_text[4][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][3]) - 1] = 0
+                        field[4][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][3]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[4][3]) - 1] = 0
+                    field[4][3][int(user_text[4][3]) - 1] = 1
             if active40:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text40 = user_text40[:-1]
+                    user_text[4][4] = user_text[4][4][:-1]
                 else:
-                    user_text40 = event.unicode
+                    user_text[4][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][4]) - 1] = 0
+                        field[4][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][4]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[4][4]) - 1] = 0
+                    field[4][4][int(user_text[4][4]) - 1] = 1
             if active41:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text41 = user_text41[:-1]
+                    user_text[4][5] = user_text[4][5][:-1]
                 else:
-                    user_text41 = event.unicode
+                    user_text[4][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][5]) - 1] = 0
+                        field[4][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][5]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[4][5]) - 1] = 0
+                    field[4][5][int(user_text[4][5]) - 1] = 1
+
             if active42:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text42 = user_text42[:-1]
+                    user_text[4][6] = user_text[4][6][:-1]
                 else:
-                    user_text42 = event.unicode
+                    user_text[4][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][6]) - 1] = 0
+                        field[4][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][6]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 9):
+                            field[i][j][int(user_text[4][6]) - 1] = 0
+                    field[4][6][int(user_text[4][6]) - 1] = 1
             if active43:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text43 = user_text43[:-1]
+                    user_text[4][7] = user_text[4][7][:-1]
                 else:
-                    user_text43 = event.unicode
+                    user_text[4][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][7]) - 1] = 0
+                        field[4][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][7]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[4][7]) - 1] = 0
+                    field[4][7][int(user_text[4][7]) - 1] = 1
             if active44:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text44 = user_text44[:-1]
+                    user_text[4][8] = user_text[4][8][:-1]
                 else:
-                    user_text44 = event.unicode
+                    user_text[4][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[4][8]) - 1] = 0
+                        field[4][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[4][8]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[4][8]) - 1] = 0
+                    field[4][8][int(user_text[4][8]) - 1] = 1
+
             if active45:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text45 = user_text45[:-1]
+                    user_text[5][0] = user_text[5][0][:-1]
                 else:
-                    user_text45 = event.unicode
+                    user_text[5][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][0]) - 1] = 0
+                        field[5][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][0]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[5][0]) - 1] = 0
+                    field[5][0][int(user_text[5][0]) - 1] = 1
             if active46:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text46 = user_text46[:-1]
+                    user_text[5][1] = user_text[5][1][:-1]
                 else:
-                    user_text46 = event.unicode
+                    user_text[5][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][1]) - 1] = 0
+                        field[5][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][1]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[5][1]) - 1] = 0
+                    field[5][1][int(user_text[5][1]) - 1] = 1
             if active47:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text47 = user_text47[:-1]
+                    user_text[5][2] = user_text[5][2][:-1]
                 else:
-                    user_text47 = event.unicode
+                    user_text[5][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][2]) - 1] = 0
+                        field[5][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][2]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[5][2]) - 1] = 0
+                    field[5][2][int(user_text[5][2]) - 1] = 1
+
             if active48:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text48 = user_text48[:-1]
+                    user_text[5][3] = user_text[5][3][:-1]
                 else:
-                    user_text48 = event.unicode
+                    user_text[5][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][3]) - 1] = 0
+                        field[5][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][3]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[5][3]) - 1] = 0
+                    field[5][3][int(user_text[5][3]) - 1] = 1
             if active49:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text49 = user_text49[:-1]
+                    user_text[5][4] = user_text[5][4][:-1]
                 else:
-                    user_text49 = event.unicode
+                    user_text[5][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][4]) - 1] = 0
+                        field[5][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][4]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[5][4]) - 1] = 0
+                    field[5][4][int(user_text[5][4]) - 1] = 1
             if active50:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text50 = user_text50[:-1]
+                    user_text[5][5] = user_text[5][5][:-1]
                 else:
-                    user_text50 = event.unicode
+                    user_text[5][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][5]) - 1] = 0
+                        field[5][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][5]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[5][5]) - 1] = 0
+                    field[5][5][int(user_text[5][5]) - 1] = 1
+
             if active51:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text51 = user_text51[:-1]
+                    user_text[5][6] = user_text[5][6][:-1]
                 else:
-                    user_text51 = event.unicode
+                    user_text[5][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][6]) - 1] = 0
+                        field[5][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][6]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[5][6]) - 1] = 0
+                    field[5][6][int(user_text[5][6]) - 1] = 1
             if active52:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text52 = user_text52[:-1]
+                    user_text[5][7] = user_text[5][7][:-1]
                 else:
-                    user_text52 = event.unicode
+                    user_text[5][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][7]) - 1] = 0
+                        field[5][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][7]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[5][7]) - 1] = 0
+                    field[5][7][int(user_text[5][7]) - 1] = 1
             if active53:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text53 = user_text53[:-1]
+                    user_text[5][8] = user_text[5][8][:-1]
                 else:
-                    user_text53 = event.unicode
+                    user_text[5][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[5][8]) - 1] = 0
+                        field[5][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[5][8]) - 1] = 0
+                    for i in range(3, 6):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[5][8]) - 1] = 0
+                    field[5][8][int(user_text[5][8]) - 1] = 1
+
             if active54:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text54 = user_text54[:-1]
+                    user_text[6][0] = user_text[6][0][:-1]
                 else:
-                    user_text54 = event.unicode
+                    user_text[6][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][0]) - 1] = 0
+                        field[6][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][0]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[6][0]) - 1] = 0
+                    field[6][0][int(user_text[6][0]) - 1] = 1
             if active55:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text55 = user_text55[:-1]
+                    user_text[6][1] = user_text[6][1][:-1]
                 else:
-                    user_text55 = event.unicode
+                    user_text[6][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][1]) - 1] = 0
+                        field[6][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][1]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[6][1]) - 1] = 0
+                    field[6][1][int(user_text[6][1]) - 1] = 1
             if active56:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text56 = user_text56[:-1]
+                    user_text[6][2] = user_text[6][2][:-1]
                 else:
-                    user_text56 = event.unicode
+                    user_text[6][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][2]) - 1] = 0
+                        field[6][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][2]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[6][2]) - 1] = 0
+                    field[6][2][int(user_text[6][2]) - 1] = 1
+
             if active57:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text57 = user_text57[:-1]
+                    user_text[6][3] = user_text[6][3][:-1]
                 else:
-                    user_text57 = event.unicode
+                    user_text[6][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][3]) - 1] = 0
+                        field[6][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][3]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[6][3]) - 1] = 0
+                    field[6][3][int(user_text[6][3]) - 1] = 1
             if active58:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text58 = user_text58[:-1]
+                    user_text[6][4] = user_text[6][4][:-1]
                 else:
-                    user_text58 = event.unicode
+                    user_text[6][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][4]) - 1] = 0
+                        field[6][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][4]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[6][4]) - 1] = 0
+                    field[6][4][int(user_text[6][4]) - 1] = 1
             if active59:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text59 = user_text59[:-1]
+                    user_text[6][5] = user_text[6][5][:-1]
                 else:
-                    user_text59 = event.unicode
+                    user_text[6][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][5]) - 1] = 0
+                        field[6][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][5]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[6][5]) - 1] = 0
+                    field[6][5][int(user_text[6][5]) - 1] = 1
+
             if active60:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text60 = user_text60[:-1]
+                    user_text[6][6] = user_text[6][6][:-1]
                 else:
-                    user_text60 = event.unicode
+                    user_text[6][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][6]) - 1] = 0
+                        field[6][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][6]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[6][6]) - 1] = 0
+                    field[6][6][int(user_text[6][6]) - 1] = 1
             if active61:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text61 = user_text61[:-1]
+                    user_text[6][7] = user_text[6][7][:-1]
                 else:
-                    user_text61 = event.unicode
+                    user_text[6][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][7]) - 1] = 0
+                        field[6][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][7]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[6][7]) - 1] = 0
+                    field[6][7][int(user_text[6][7]) - 1] = 1
             if active62:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text62 = user_text62[:-1]
+                    user_text[6][8] = user_text[6][8][:-1]
                 else:
-                    user_text62 = event.unicode
+                    user_text[6][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[6][8]) - 1] = 0
+                        field[6][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[6][8]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[6][8]) - 1] = 0
+                    field[6][8][int(user_text[6][8]) - 1] = 1
+
             if active63:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text63 = user_text63[:-1]
+                    user_text[7][0] = user_text[7][0][:-1]
                 else:
-                    user_text63 = event.unicode
+                    user_text[7][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][0]) - 1] = 0
+                        field[7][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][0]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[7][0]) - 1] = 0
+                    field[7][0][int(user_text[7][0]) - 1] = 1
             if active64:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text64 = user_text64[:-1]
+                    user_text[7][1] = user_text[7][1][:-1]
                 else:
-                    user_text64 = event.unicode
+                    user_text[7][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][1]) - 1] = 0
+                        field[7][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][1]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[7][1]) - 1] = 0
+                    field[7][1][int(user_text[7][1]) - 1] = 1
             if active65:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text65 = user_text65[:-1]
+                    user_text[7][2] = user_text[7][2][:-1]
                 else:
-                    user_text65 = event.unicode
+                    user_text[7][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][2]) - 1] = 0
+                        field[7][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][2]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[7][2]) - 1] = 0
+                    field[7][2][int(user_text[7][2]) - 1] = 1
+
             if active66:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text66 = user_text66[:-1]
+                    user_text[7][3] = user_text[7][3][:-1]
                 else:
-                    user_text66 = event.unicode
+                    user_text[7][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][3]) - 1] = 0
+                        field[7][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][3]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[7][3]) - 1] = 0
+                    field[7][3][int(user_text[7][3]) - 1] = 1
             if active67:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text67 = user_text67[:-1]
+                    user_text[7][4] = user_text[7][4][:-1]
                 else:
-                    user_text67 = event.unicode
+                    user_text[7][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][4]) - 1] = 0
+                        field[7][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][4]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[7][4]) - 1] = 0
+                    field[7][4][int(user_text[7][4]) - 1] = 1
             if active68:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text68 = user_text68[:-1]
+                    user_text[7][5] = user_text[7][5][:-1]
                 else:
-                    user_text68 = event.unicode
+                    user_text[7][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][5]) - 1] = 0
+                        field[7][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][5]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[7][5]) - 1] = 0
+                    field[7][5][int(user_text[7][5]) - 1] = 1
+
             if active69:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text69 = user_text69[:-1]
+                    user_text[7][6] = user_text[7][6][:-1]
                 else:
-                    user_text69 = event.unicode
+                    user_text[7][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][6]) - 1] = 0
+                        field[7][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][6]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[7][6]) - 1] = 0
+                    field[7][6][int(user_text[7][6]) - 1] = 1
             if active70:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text70 = user_text70[:-1]
+                    user_text[7][7] = user_text[7][7][:-1]
                 else:
-                    user_text70 = event.unicode
+                    user_text[7][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][7]) - 1] = 0
+                        field[7][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][7]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[7][7]) - 1] = 0
+                    field[7][7][int(user_text[7][7]) - 1] = 1
             if active71:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text71 = user_text71[:-1]
+                    user_text[7][8] = user_text[7][8][:-1]
                 else:
-                    user_text71 = event.unicode
+                    user_text[7][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[7][8]) - 1] = 0
+                        field[7][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[7][8]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[7][8]) - 1] = 0
+                    field[7][8][int(user_text[7][8]) - 1] = 1
+
             if active72:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text72 = user_text72[:-1]
+                    user_text[8][0] = user_text[8][0][:-1]
                 else:
-                    user_text72 = event.unicode
+                    user_text[8][0] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][0]) - 1] = 0
+                        field[8][0][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][0]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[8][0]) - 1] = 0
+                    field[8][0][int(user_text[8][0]) - 1] = 1
             if active73:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text73 = user_text73[:-1]
+                    user_text[8][1] = user_text[8][1][:-1]
                 else:
-                    user_text73 = event.unicode
+                    user_text[8][1] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][1]) - 1] = 0
+                        field[8][1][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][1]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[8][1]) - 1] = 0
+                    field[8][1][int(user_text[8][1]) - 1] = 1
             if active74:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text74 = user_text74[:-1]
+                    user_text[8][2] = user_text[8][2][:-1]
                 else:
-                    user_text74 = event.unicode
+                    user_text[8][2] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][2]) - 1] = 0
+                        field[8][2][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][2]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(0, 3):
+                            field[i][j][int(user_text[8][2]) - 1] = 0
+                    field[8][2][int(user_text[8][2]) - 1] = 1
+
             if active75:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text75 = user_text75[:-1]
+                    user_text[8][3] = user_text[8][3][:-1]
                 else:
-                    user_text75 = event.unicode
+                    user_text[8][3] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][3]) - 1] = 0
+                        field[8][3][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][3]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[8][3]) - 1] = 0
+                    field[8][3][int(user_text[8][3]) - 1] = 1
             if active76:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text76 = user_text76[:-1]
+                    user_text[8][4] = user_text[8][4][:-1]
                 else:
-                    user_text76 = event.unicode
+                    user_text[8][4] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][4]) - 1] = 0
+                        field[8][4][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][4]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[8][4]) - 1] = 0
+                    field[8][4][int(user_text[8][4]) - 1] = 1
             if active77:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text77 = user_text77[:-1]
+                    user_text[8][5] = user_text[8][5][:-1]
                 else:
-                    user_text77 = event.unicode
+                    user_text[8][5] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][5]) - 1] = 0
+                        field[8][5][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][5]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(3, 6):
+                            field[i][j][int(user_text[8][5]) - 1] = 0
+                    field[8][5][int(user_text[8][5]) - 1] = 1
+
             if active78:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text78 = user_text78[:-1]
+                    user_text[8][6] = user_text[8][6][:-1]
                 else:
-                    user_text78 = event.unicode
+                    user_text[8][6] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][6]) - 1] = 0
+                        field[8][6][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][6]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[8][6]) - 1] = 0
+                    field[8][6][int(user_text[8][6]) - 1] = 1
             if active79:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text79 = user_text79[:-1]
+                    user_text[8][7] = user_text[8][7][:-1]
                 else:
-                    user_text79 = event.unicode
+                    user_text[8][7] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][7]) - 1] = 0
+                        field[8][7][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][7]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[8][7]) - 1] = 0
+                    field[8][7][int(user_text[8][7]) - 1] = 1
             if active80:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text80 = user_text80[:-1]
+                    user_text[8][8] = user_text[8][8][:-1]
                 else:
-                    user_text80 = event.unicode
+                    user_text[8][8] = event.unicode
+                    for i in range(0, 9):
+                        field[0][i][int(user_text[8][8]) - 1] = 0
+                        field[8][8][i] = 0
+                    for j in range(0, 9):
+                        field[j][0][int(user_text[8][8]) - 1] = 0
+                    for i in range(6, 9):
+                        for j in range(6, 9):
+                            field[i][j][int(user_text[8][8]) - 1] = 0
+                    field[8][8][int(user_text[8][8]) - 1] = 1
 
     screen.fill((30, 30, 30))
-#    pygame.draw.line(screen, (255, 255, 255), (299, 10), (299, 890), 10)
-#    pygame.draw.line(screen, (255, 255, 255), (599, 10), (599, 890), 10)
-#    pygame.draw.line(screen, (255, 255, 255), (10, 599), (890, 599), 10)
-#    pygame.draw.line(screen, (255, 255, 255), (10, 299), (890, 299), 10)
+    #    pygame.draw.line(screen, (255, 255, 255), (299, 10), (299, 890), 10)
+    #    pygame.draw.line(screen, (255, 255, 255), (599, 10), (599, 890), 10)
+    #    pygame.draw.line(screen, (255, 255, 255), (10, 599), (890, 599), 10)
+    #    pygame.draw.line(screen, (255, 255, 255), (10, 299), (890, 299), 10)
 
-#set color
+    # set color
     if active:
         color = color_active
     else:
@@ -1529,175 +2207,174 @@ while True:
     pygame.draw.rect(screen, color78, input_rect78, 5)
     pygame.draw.rect(screen, color79, input_rect79, 5)
     pygame.draw.rect(screen, color80, input_rect80, 5)
-    pygame.draw.rect(screen, color_submit, submit_rect,)
+    pygame.draw.rect(screen, color_submit, submit_rect, )
 
-    text_surface = base_font.render(user_text, False, (255, 255, 255))
+    text_surface = base_font.render(user_text[0][0], False, (255, 255, 255))
     screen.blit(text_surface, (input_rect.x + 30, input_rect.y + 25))
-    text_surface1 = base_font.render(user_text1, False, (255, 255, 255))
+    text_surface1 = base_font.render(user_text[0][1], False, (255, 255, 255))
     screen.blit(text_surface1, (input_rect1.x + 30, input_rect1.y + 25))
-    text_surface2 = base_font.render(user_text2, False, (255, 255, 255))
+    text_surface2 = base_font.render(user_text[0][2], False, (255, 255, 255))
     screen.blit(text_surface2, (input_rect2.x + 30, input_rect2.y + 25))
-    text_surface3 = base_font.render(user_text3, False, (255, 255, 255))
+    text_surface3 = base_font.render(user_text[0][3], False, (255, 255, 255))
     screen.blit(text_surface3, (input_rect3.x + 30, input_rect3.y + 25))
-    text_surface4 = base_font.render(user_text4, False, (255, 255, 255))
+    text_surface4 = base_font.render(user_text[0][4], False, (255, 255, 255))
     screen.blit(text_surface4, (input_rect4.x + 30, input_rect4.y + 25))
-    text_surface5 = base_font.render(user_text5, False, (255, 255, 255))
+    text_surface5 = base_font.render(user_text[0][5], False, (255, 255, 255))
     screen.blit(text_surface5, (input_rect5.x + 30, input_rect5.y + 25))
-    text_surface6 = base_font.render(user_text6, False, (255, 255, 255))
+    text_surface6 = base_font.render(user_text[0][6], False, (255, 255, 255))
     screen.blit(text_surface6, (input_rect6.x + 30, input_rect6.y + 25))
-    text_surface7 = base_font.render(user_text7, False, (255, 255, 255))
+    text_surface7 = base_font.render(user_text[0][7], False, (255, 255, 255))
     screen.blit(text_surface7, (input_rect7.x + 30, input_rect7.y + 25))
-    text_surface8 = base_font.render(user_text8, False, (255, 255, 255))
+    text_surface8 = base_font.render(user_text[0][8], False, (255, 255, 255))
     screen.blit(text_surface8, (input_rect8.x + 30, input_rect8.y + 25))
-    text_surface9 = base_font.render(user_text9, False, (255, 255, 255))
+    text_surface9 = base_font.render(user_text[1][0], False, (255, 255, 255))
     screen.blit(text_surface9, (input_rect9.x + 30, input_rect9.y + 25))
-    text_surface10 = base_font.render(user_text10, False, (255, 255, 255))
+    text_surface10 = base_font.render(user_text[1][1], False, (255, 255, 255))
     screen.blit(text_surface10, (input_rect10.x + 30, input_rect10.y + 25))
-    text_surface11 = base_font.render(user_text11, False, (255, 255, 255))
+    text_surface11 = base_font.render(user_text[1][2], False, (255, 255, 255))
     screen.blit(text_surface11, (input_rect11.x + 30, input_rect11.y + 25))
-    text_surface12 = base_font.render(user_text12, False, (255, 255, 255))
+    text_surface12 = base_font.render(user_text[1][3], False, (255, 255, 255))
     screen.blit(text_surface12, (input_rect12.x + 30, input_rect12.y + 25))
-    text_surface13 = base_font.render(user_text13, False, (255, 255, 255))
+    text_surface13 = base_font.render(user_text[1][4], False, (255, 255, 255))
     screen.blit(text_surface13, (input_rect13.x + 30, input_rect13.y + 25))
-    text_surface14 = base_font.render(user_text14, False, (255, 255, 255))
+    text_surface14 = base_font.render(user_text[1][5], False, (255, 255, 255))
     screen.blit(text_surface14, (input_rect14.x + 30, input_rect14.y + 25))
-    text_surface15 = base_font.render(user_text15, False, (255, 255, 255))
+    text_surface15 = base_font.render(user_text[1][6], False, (255, 255, 255))
     screen.blit(text_surface15, (input_rect15.x + 30, input_rect15.y + 25))
-    text_surface16 = base_font.render(user_text16, False, (255, 255, 255))
+    text_surface16 = base_font.render(user_text[1][7], False, (255, 255, 255))
     screen.blit(text_surface16, (input_rect16.x + 30, input_rect16.y + 25))
-    text_surface17 = base_font.render(user_text17, False, (255, 255, 255))
+    text_surface17 = base_font.render(user_text[1][8], False, (255, 255, 255))
     screen.blit(text_surface17, (input_rect17.x + 30, input_rect17.y + 25))
-    text_surface18 = base_font.render(user_text18, False, (255, 255, 255))
+    text_surface18 = base_font.render(user_text[2][0], False, (255, 255, 255))
     screen.blit(text_surface18, (input_rect18.x + 30, input_rect18.y + 25))
-    text_surface19 = base_font.render(user_text19, False, (255, 255, 255))
+    text_surface19 = base_font.render(user_text[2][1], False, (255, 255, 255))
     screen.blit(text_surface19, (input_rect19.x + 30, input_rect19.y + 25))
-    text_surface20 = base_font.render(user_text20, False, (255, 255, 255))
+    text_surface20 = base_font.render(user_text[2][2], False, (255, 255, 255))
     screen.blit(text_surface20, (input_rect20.x + 30, input_rect20.y + 25))
-    text_surface21 = base_font.render(user_text21, False, (255, 255, 255))
+    text_surface21 = base_font.render(user_text[2][3], False, (255, 255, 255))
     screen.blit(text_surface21, (input_rect21.x + 30, input_rect21.y + 25))
-    text_surface22 = base_font.render(user_text22, False, (255, 255, 255))
+    text_surface22 = base_font.render(user_text[2][4], False, (255, 255, 255))
     screen.blit(text_surface22, (input_rect22.x + 30, input_rect22.y + 25))
-    text_surface23 = base_font.render(user_text23, False, (255, 255, 255))
+    text_surface23 = base_font.render(user_text[2][5], False, (255, 255, 255))
     screen.blit(text_surface23, (input_rect23.x + 30, input_rect23.y + 25))
-    text_surface24 = base_font.render(user_text24, False, (255, 255, 255))
+    text_surface24 = base_font.render(user_text[2][6], False, (255, 255, 255))
     screen.blit(text_surface24, (input_rect24.x + 30, input_rect24.y + 25))
-    text_surface25 = base_font.render(user_text25, False, (255, 255, 255))
+    text_surface25 = base_font.render(user_text[2][7], False, (255, 255, 255))
     screen.blit(text_surface25, (input_rect25.x + 30, input_rect25.y + 25))
-    text_surface26 = base_font.render(user_text26, False, (255, 255, 255))
+    text_surface26 = base_font.render(user_text[2][8], False, (255, 255, 255))
     screen.blit(text_surface26, (input_rect26.x + 30, input_rect26.y + 25))
-    text_surface27 = base_font.render(user_text27, False, (255, 255, 255))
+    text_surface27 = base_font.render(user_text[3][0], False, (255, 255, 255))
     screen.blit(text_surface27, (input_rect27.x + 30, input_rect27.y + 25))
-    text_surface28 = base_font.render(user_text28, False, (255, 255, 255))
+    text_surface28 = base_font.render(user_text[3][1], False, (255, 255, 255))
     screen.blit(text_surface28, (input_rect28.x + 30, input_rect28.y + 25))
-    text_surface29 = base_font.render(user_text29, False, (255, 255, 255))
+    text_surface29 = base_font.render(user_text[3][2], False, (255, 255, 255))
     screen.blit(text_surface29, (input_rect29.x + 30, input_rect29.y + 25))
-    text_surface30 = base_font.render(user_text30, False, (255, 255, 255))
+    text_surface30 = base_font.render(user_text[3][3], False, (255, 255, 255))
     screen.blit(text_surface30, (input_rect30.x + 30, input_rect30.y + 25))
-    text_surface31 = base_font.render(user_text31, False, (255, 255, 255))
+    text_surface31 = base_font.render(user_text[3][4], False, (255, 255, 255))
     screen.blit(text_surface31, (input_rect31.x + 30, input_rect31.y + 25))
-    text_surface32 = base_font.render(user_text32, False, (255, 255, 255))
+    text_surface32 = base_font.render(user_text[3][5], False, (255, 255, 255))
     screen.blit(text_surface32, (input_rect32.x + 30, input_rect32.y + 25))
-    text_surface33 = base_font.render(user_text33, False, (255, 255, 255))
+    text_surface33 = base_font.render(user_text[3][6], False, (255, 255, 255))
     screen.blit(text_surface33, (input_rect33.x + 30, input_rect33.y + 25))
-    text_surface34 = base_font.render(user_text34, False, (255, 255, 255))
+    text_surface34 = base_font.render(user_text[3][7], False, (255, 255, 255))
     screen.blit(text_surface34, (input_rect34.x + 30, input_rect34.y + 25))
-    text_surface35 = base_font.render(user_text35, False, (255, 255, 255))
+    text_surface35 = base_font.render(user_text[3][8], False, (255, 255, 255))
     screen.blit(text_surface35, (input_rect35.x + 30, input_rect35.y + 25))
-    text_surface36 = base_font.render(user_text36, False, (255, 255, 255))
+    text_surface36 = base_font.render(user_text[4][0], False, (255, 255, 255))
     screen.blit(text_surface36, (input_rect36.x + 30, input_rect36.y + 25))
-    text_surface37 = base_font.render(user_text37, False, (255, 255, 255))
+    text_surface37 = base_font.render(user_text[4][1], False, (255, 255, 255))
     screen.blit(text_surface37, (input_rect37.x + 30, input_rect37.y + 25))
-    text_surface38 = base_font.render(user_text38, False, (255, 255, 255))
+    text_surface38 = base_font.render(user_text[4][2], False, (255, 255, 255))
     screen.blit(text_surface38, (input_rect38.x + 30, input_rect38.y + 25))
-    text_surface39 = base_font.render(user_text39, False, (255, 255, 255))
+    text_surface39 = base_font.render(user_text[4][3], False, (255, 255, 255))
     screen.blit(text_surface39, (input_rect39.x + 30, input_rect39.y + 25))
-    text_surface40 = base_font.render(user_text40, False, (255, 255, 255))
+    text_surface40 = base_font.render(user_text[4][4], False, (255, 255, 255))
     screen.blit(text_surface40, (input_rect40.x + 30, input_rect40.y + 25))
-    text_surface41 = base_font.render(user_text41, False, (255, 255, 255))
+    text_surface41 = base_font.render(user_text[4][5], False, (255, 255, 255))
     screen.blit(text_surface41, (input_rect41.x + 30, input_rect41.y + 25))
-    text_surface42 = base_font.render(user_text42, False, (255, 255, 255))
+    text_surface42 = base_font.render(user_text[4][6], False, (255, 255, 255))
     screen.blit(text_surface42, (input_rect42.x + 30, input_rect42.y + 25))
-    text_surface43 = base_font.render(user_text43, False, (255, 255, 255))
+    text_surface43 = base_font.render(user_text[4][7], False, (255, 255, 255))
     screen.blit(text_surface43, (input_rect43.x + 30, input_rect43.y + 25))
-    text_surface44 = base_font.render(user_text44, False, (255, 255, 255))
+    text_surface44 = base_font.render(user_text[4][8], False, (255, 255, 255))
     screen.blit(text_surface44, (input_rect44.x + 30, input_rect44.y + 25))
-    text_surface45 = base_font.render(user_text45, False, (255, 255, 255))
+    text_surface45 = base_font.render(user_text[5][0], False, (255, 255, 255))
     screen.blit(text_surface45, (input_rect45.x + 30, input_rect45.y + 25))
-    text_surface46 = base_font.render(user_text46, False, (255, 255, 255))
+    text_surface46 = base_font.render(user_text[5][1], False, (255, 255, 255))
     screen.blit(text_surface46, (input_rect46.x + 30, input_rect46.y + 25))
-    text_surface47 = base_font.render(user_text47, False, (255, 255, 255))
+    text_surface47 = base_font.render(user_text[5][2], False, (255, 255, 255))
     screen.blit(text_surface47, (input_rect47.x + 30, input_rect47.y + 25))
-    text_surface48 = base_font.render(user_text48, False, (255, 255, 255))
+    text_surface48 = base_font.render(user_text[5][3], False, (255, 255, 255))
     screen.blit(text_surface48, (input_rect48.x + 30, input_rect48.y + 25))
-    text_surface49 = base_font.render(user_text49, False, (255, 255, 255))
+    text_surface49 = base_font.render(user_text[5][4], False, (255, 255, 255))
     screen.blit(text_surface49, (input_rect49.x + 30, input_rect49.y + 25))
-    text_surface50 = base_font.render(user_text50, False, (255, 255, 255))
+    text_surface50 = base_font.render(user_text[5][5], False, (255, 255, 255))
     screen.blit(text_surface50, (input_rect50.x + 30, input_rect50.y + 25))
-    text_surface51 = base_font.render(user_text51, False, (255, 255, 255))
+    text_surface51 = base_font.render(user_text[5][6], False, (255, 255, 255))
     screen.blit(text_surface51, (input_rect51.x + 30, input_rect51.y + 25))
-    text_surface52 = base_font.render(user_text52, False, (255, 255, 255))
+    text_surface52 = base_font.render(user_text[5][7], False, (255, 255, 255))
     screen.blit(text_surface52, (input_rect52.x + 30, input_rect52.y + 25))
-    text_surface53 = base_font.render(user_text53, False, (255, 255, 255))
+    text_surface53 = base_font.render(user_text[5][8], False, (255, 255, 255))
     screen.blit(text_surface53, (input_rect53.x + 30, input_rect53.y + 25))
-    text_surface54 = base_font.render(user_text54, False, (255, 255, 255))
+    text_surface54 = base_font.render(user_text[6][0], False, (255, 255, 255))
     screen.blit(text_surface54, (input_rect54.x + 30, input_rect54.y + 25))
-    text_surface55 = base_font.render(user_text55, False, (255, 255, 255))
+    text_surface55 = base_font.render(user_text[6][1], False, (255, 255, 255))
     screen.blit(text_surface55, (input_rect55.x + 30, input_rect55.y + 25))
-    text_surface56 = base_font.render(user_text56, False, (255, 255, 255))
+    text_surface56 = base_font.render(user_text[6][2], False, (255, 255, 255))
     screen.blit(text_surface56, (input_rect56.x + 30, input_rect56.y + 25))
-    text_surface57 = base_font.render(user_text57, False, (255, 255, 255))
+    text_surface57 = base_font.render(user_text[6][3], False, (255, 255, 255))
     screen.blit(text_surface57, (input_rect57.x + 30, input_rect57.y + 25))
-    text_surface58 = base_font.render(user_text58, False, (255, 255, 255))
+    text_surface58 = base_font.render(user_text[6][4], False, (255, 255, 255))
     screen.blit(text_surface58, (input_rect58.x + 30, input_rect58.y + 25))
-    text_surface59 = base_font.render(user_text59, False, (255, 255, 255))
+    text_surface59 = base_font.render(user_text[6][5], False, (255, 255, 255))
     screen.blit(text_surface59, (input_rect59.x + 30, input_rect59.y + 25))
-    text_surface60 = base_font.render(user_text60, False, (255, 255, 255))
+    text_surface60 = base_font.render(user_text[6][6], False, (255, 255, 255))
     screen.blit(text_surface60, (input_rect60.x + 30, input_rect60.y + 25))
-    text_surface61 = base_font.render(user_text61, False, (255, 255, 255))
+    text_surface61 = base_font.render(user_text[6][7], False, (255, 255, 255))
     screen.blit(text_surface61, (input_rect61.x + 30, input_rect61.y + 25))
-    text_surface62 = base_font.render(user_text62, False, (255, 255, 255))
+    text_surface62 = base_font.render(user_text[6][8], False, (255, 255, 255))
     screen.blit(text_surface62, (input_rect62.x + 30, input_rect62.y + 25))
-    text_surface63 = base_font.render(user_text63, False, (255, 255, 255))
+    text_surface63 = base_font.render(user_text[7][0], False, (255, 255, 255))
     screen.blit(text_surface63, (input_rect63.x + 30, input_rect63.y + 25))
-    text_surface64 = base_font.render(user_text64, False, (255, 255, 255))
+    text_surface64 = base_font.render(user_text[7][1], False, (255, 255, 255))
     screen.blit(text_surface64, (input_rect64.x + 30, input_rect64.y + 25))
-    text_surface65 = base_font.render(user_text65, False, (255, 255, 255))
+    text_surface65 = base_font.render(user_text[7][2], False, (255, 255, 255))
     screen.blit(text_surface65, (input_rect65.x + 30, input_rect65.y + 25))
-    text_surface66 = base_font.render(user_text66, False, (255, 255, 255))
+    text_surface66 = base_font.render(user_text[7][3], False, (255, 255, 255))
     screen.blit(text_surface66, (input_rect66.x + 30, input_rect66.y + 25))
-    text_surface67 = base_font.render(user_text67, False, (255, 255, 255))
+    text_surface67 = base_font.render(user_text[7][4], False, (255, 255, 255))
     screen.blit(text_surface67, (input_rect67.x + 30, input_rect67.y + 25))
-    text_surface68 = base_font.render(user_text68, False, (255, 255, 255))
+    text_surface68 = base_font.render(user_text[7][5], False, (255, 255, 255))
     screen.blit(text_surface68, (input_rect68.x + 30, input_rect68.y + 25))
-    text_surface69 = base_font.render(user_text69, False, (255, 255, 255))
+    text_surface69 = base_font.render(user_text[7][6], False, (255, 255, 255))
     screen.blit(text_surface69, (input_rect69.x + 30, input_rect69.y + 25))
-    text_surface70 = base_font.render(user_text70, False, (255, 255, 255))
+    text_surface70 = base_font.render(user_text[7][7], False, (255, 255, 255))
     screen.blit(text_surface70, (input_rect70.x + 30, input_rect70.y + 25))
-    text_surface71 = base_font.render(user_text71, False, (255, 255, 255))
+    text_surface71 = base_font.render(user_text[7][8], False, (255, 255, 255))
     screen.blit(text_surface71, (input_rect71.x + 30, input_rect71.y + 25))
-    text_surface72 = base_font.render(user_text72, False, (255, 255, 255))
+    text_surface72 = base_font.render(user_text[8][0], False, (255, 255, 255))
     screen.blit(text_surface72, (input_rect72.x + 30, input_rect72.y + 25))
-    text_surface73 = base_font.render(user_text73, False, (255, 255, 255))
+    text_surface73 = base_font.render(user_text[8][1], False, (255, 255, 255))
     screen.blit(text_surface73, (input_rect73.x + 30, input_rect73.y + 25))
-    text_surface74 = base_font.render(user_text74, False, (255, 255, 255))
+    text_surface74 = base_font.render(user_text[8][2], False, (255, 255, 255))
     screen.blit(text_surface74, (input_rect74.x + 30, input_rect74.y + 25))
-    text_surface75 = base_font.render(user_text75, False, (255, 255, 255))
+    text_surface75 = base_font.render(user_text[8][3], False, (255, 255, 255))
     screen.blit(text_surface75, (input_rect75.x + 30, input_rect75.y + 25))
-    text_surface76 = base_font.render(user_text76, False, (255, 255, 255))
+    text_surface76 = base_font.render(user_text[8][4], False, (255, 255, 255))
     screen.blit(text_surface76, (input_rect76.x + 30, input_rect76.y + 25))
-    text_surface77 = base_font.render(user_text77, False, (255, 255, 255))
+    text_surface77 = base_font.render(user_text[8][5], False, (255, 255, 255))
     screen.blit(text_surface77, (input_rect77.x + 30, input_rect77.y + 25))
-    text_surface78 = base_font.render(user_text78, False, (255, 255, 255))
+    text_surface78 = base_font.render(user_text[8][6], False, (255, 255, 255))
     screen.blit(text_surface78, (input_rect78.x + 30, input_rect78.y + 25))
-    text_surface79 = base_font.render(user_text79, False, (255, 255, 255))
+    text_surface79 = base_font.render(user_text[8][7], False, (255, 255, 255))
     screen.blit(text_surface79, (input_rect79.x + 30, input_rect79.y + 25))
-    text_surface80 = base_font.render(user_text80, False, (255, 255, 255))
+    text_surface80 = base_font.render(user_text[8][8], False, (255, 255, 255))
     screen.blit(text_surface80, (input_rect80.x + 30, input_rect80.y + 25))
 
     submit = base_font.render(text, False, (255, 255, 255))
     screen.blit(submit, (submit_rect.x + 350, submit_rect.y + 25))
 
-
-
     pygame.display.flip()
     clock.tick(60)
+
