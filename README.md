@@ -2,4 +2,4 @@
  A pygame Sudoku  UI
  logic is coming soon
  
- very messy code since im a beginner
+horrible code since im not yet familliar with classes and objects in python
